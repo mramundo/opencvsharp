@@ -92,6 +92,7 @@ jobs:
           ls 
           ls OpenCvSharpExtern
           cp OpenCvSharpExtern/libOpenCvSharpExtern.dylib ${GITHUB_WORKSPACE}/nuget/
+          sudo cp ${GITHUB_WORKSPACE}/nuget/libOpenCvSharpExtern.dylib /usr/local/lib/
 
       - name: Check OpenCvSharpExtern
         run: |
