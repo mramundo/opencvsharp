@@ -1,7 +1,13 @@
 cmake_minimum_required(VERSION 3.0)
 
+# Print environment variables
+message(EMSCRIPTEN="${EMSCRIPTEN}")
+message(APPLE="${APPLE}")
+message(CMAKE_VERSION="${CMAKE_VERSION}")
+message(CMAKE_GENERATOR="${CMAKE_GENERATOR}")
+
 include_directories(${OpenCV_INCLUDE_DIR})
-IF(EMSCRIPTEN)
+IF(!EMSCRIPTEN)
 	link_directories(${OpenCV_LIBRARY_DIR} ${OpenCV_LIBRARIES})
 ENDIF()
 IF(APPLE)
@@ -34,7 +40,7 @@ if(OpenCV_FOUND)
 		set(CMAKE_CXX_STANDARD_LIBRARIES "${CMAKE_CXX_STANDARD_LIBRARIES} kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib")
 	endif()
 
-	if(!EMSCRIPTEN)
+	if(EMSCRIPTEN)
 		# TODO: replace path
 		add_library(OpenCvSharpExtern STATIC ${OPENCVSHARP_FILES} ${WASM_LIB})
 	else()
